@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), AddFragment.OnNoteAddedListener, EditF
             onTaskEdit = {task ->showEditFragment(task)  }
         )
         binding.recycler.adapter = taskAdapter
+
     }
 
     private fun addTask() {
@@ -107,6 +108,11 @@ class MainActivity : AppCompatActivity(), AddFragment.OnNoteAddedListener, EditF
         task.title = newTitle
         task.desc = newDesc
         taskViewModel.updateTask(task)
+
+        val position = taskAdapter.currentList.indexOf(task)
+        if (position != -1) {
+            taskAdapter.notifyItemChanged(position)
+        }
     }
     private fun  swipeAbleTasks(){
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
@@ -122,7 +128,9 @@ class MainActivity : AppCompatActivity(), AddFragment.OnNoteAddedListener, EditF
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val task = taskAdapter.currentList[viewHolder.adapterPosition]
+                val position = viewHolder.adapterPosition
+                val task = taskAdapter.currentList.get(position)
+                taskAdapter.notifyItemChanged(position)
                 showEditFragment(task)
             }
         }
