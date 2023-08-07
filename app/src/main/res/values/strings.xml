@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TaskProject</string>
+    <string name="main_tv">Your tasks</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="et_desc">Enter for description</string>
+    <string name="et_title">Enter for title</string>
+    <string name="et_new_title">must be text</string>
+</resources>
